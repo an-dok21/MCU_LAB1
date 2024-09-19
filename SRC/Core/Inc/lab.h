@@ -22,4 +22,9 @@ void oneWayTrafficLight(uint8_t* time, int* light);
 /* Exercise 3
  * */
 void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light2);
+
+/* Exercise 4
+ * */
+void display7Segment(uint8_t number);
+
 #endif /* INC_LAB_H_ */

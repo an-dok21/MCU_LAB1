@@ -1,5 +1,8 @@
 #include<lab.h>
 
+uint8_t seg7Pin[] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6};
+int ledStateArray[] = {0, 0, 0, 0, 0, 0, 0};
+
 /* Exercise 1.
  * */
 void toggle2Led(uint8_t* status) {
@@ -151,6 +154,66 @@ void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light
 	HAL_Delay(100);
 }
 
+/* Exercise 4
+ * */
+int convertBinChar(char bin) {
+	return (bin == '1') ? 1 : 0;
+}
+
+int* convertState(char* stateStr, int count) {
+	for (int i = 0; i < count; i++) {
+		ledStateArray[i] = 0;
+	}
+	int *result = ledStateArray;
+	for (int i = 0; i < count; i++) {
+		result[i] = convertBinChar(stateStr[i]);
+	}
+	return result;
+}
+
+void display(uint8_t gpios[7], char* stateStr) {
+	int* states = convertState(stateStr, 7);
+	for (int i = 0; i < 7; i++) {
+		HAL_GPIO_WritePin(GPIOB, gpios[i], states[i]);
+	}
+}
+
+void display7Segment(uint8_t number) {
+	switch (number) {
+	case 0:
+		display(seg7Pin, "0000001");
+		break;
+	case 1:
+		display(seg7Pin, "1001111");
+		break;
+	case 2:
+		display(seg7Pin, "0010010");
+		break;
+	case 3:
+		display(seg7Pin, "0000110");
+		break;
+	case 4:
+		display(seg7Pin, "1001100");
+		break ;
+	case 5:
+		display(seg7Pin, "0100100");
+		break;
+	case 6:
+		display(seg7Pin, "0100000");
+		break ;
+	case 7:
+		display(seg7Pin, "0001111");
+		break;
+	case 8:
+		display(seg7Pin, "0000000");
+		break;
+	case 9:
+		display(seg7Pin, "0000100");
+		break;
+	default:
+		break;
+	}
+}
 
 
 

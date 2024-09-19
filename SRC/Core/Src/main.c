@@ -17,7 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include<lab.h>
+#include <lab.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -99,20 +99,24 @@ int main(void)
   HAL_GPIO_WritePin(GPIOA, LED_5_Pin, RESET);
   HAL_GPIO_WritePin(GPIOA, LED_6_Pin, RESET);
 
-  int light1 = 0;
-  int light2 = 1;
-  uint8_t time1 = 50;
-  uint8_t time2 = 30;
+//  int light1 = 0;
+//  int light2 = 1;
+//  uint8_t time1 = 50;
+//  uint8_t time2 = 30;
+//
+//  uint8_t *time1Ptr = &time1;
+//  uint8_t *time2Ptr = &time2;
+//  int *light1Ptr = &light1;
+//  int *light2Ptr = &light2;
 
-  uint8_t *time1Ptr = &time1;
-  uint8_t *time2Ptr = &time2;
-  int *light1Ptr = &light1;
-  int *light2Ptr = &light2;
-
+  uint8_t counter = 0;
   while (1)
   {
     /* USER CODE END WHILE */
-	  fourWayTrafficLight(time1Ptr, time2Ptr, light1Ptr, light2Ptr);
+	  if (counter >= 10) counter = 0;
+	  display7Segment(counter);
+	  counter++;
+	  HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -167,10 +171,15 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, LED_1_Pin|LED_2_Pin|LED_3_Pin|LED_4_Pin
                           |LED_5_Pin|LED_6_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : LED_1_Pin LED_2_Pin LED_3_Pin LED_4_Pin
                            LED_5_Pin LED_6_Pin */
@@ -180,6 +189,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB0 PB1 PB2 PB3
+                           PB4 PB5 PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
