@@ -52,22 +52,22 @@ void oneWayTrafficLight(uint8_t* time, int* light) {
 			turnOnRed();
 		}
 		else {
-			*time = 20;
+			*time = 30;
 			*light = 1;
 		}
-	} else if (*light == 1) { // YELLOW
-		if (*time != 1) {
-			*time = *time - 1;
-			turnOnYellow();
-		}
-		else {
-			*time = 30;
-			*light = 2;
-		}
-	} else { // GREEN
+	} else if (*light == 1) { // GREEN
 		if (*time != 1) {
 			*time = *time - 1;
 			turnOnGreen();
+		}
+		else {
+			*time = 20;
+			*light = 2;
+		}
+	} else { // YELOOW
+		if (*time != 1) {
+			*time = *time - 1;
+			turnOnYellow();
 		}
 		else {
 			*time = 50;
