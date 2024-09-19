@@ -269,14 +269,72 @@ void runSecond(int* counter, int* second) {
 		clearNumberOnClock(*counter);
 		if (*counter >= 11) {
 			*counter = 0;
-			clearAllClock();
 		} else {
 			*counter += 1; 		}
 	} else {
 		setNumberOnClock(*counter);
 	}
 	*second = *second - 1;
+	HAL_Delay(10);
 }
+
+void analogClockSim(int* hour, int *min, int *minCnt, int *sec, int *secCnt) {
+	// Turn on hour pointer
+	if (*sec <= 0) {
+		// Check minute here:
+		*sec = 59;
+		if (*min > 59) {
+			*min = 0;
+			clearNumberOnClock(*hour);
+//			if (*hour >= 11) { // Check hour here
+//				*hour = 0;
+//			} else {
+//				*hour += 1;
+//			}
+			if (*hour > 11) {
+				*hour = 0;
+			} else {
+				*hour += 1;
+			}
+		} else {
+			if (*min % 5 == 0) {
+				clearNumberOnClock(*minCnt);
+				if (*minCnt >= 11) {
+					*minCnt = 0;
+				} else {
+					*minCnt += 1;
+				}
+			}
+			*min += 1;
+		}
+	} else {
+		if ((*sec % 5) == 0) {
+			clearNumberOnClock(*secCnt);
+			if (*secCnt >= 11) {
+				*secCnt = 0;
+			} else {
+				*secCnt += 1;
+			}
+		}
+
+	}
+	setNumberOnClock(*hour);
+	setNumberOnClock(*minCnt);
+	setNumberOnClock(*secCnt);
+	*sec -= 1;
+	HAL_Delay(100);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -33,6 +33,7 @@ void testLed();
 void clearAllClock();
 void setNumberOnClock(int num);
 void clearNumberOnClock(int num);
-void runSecond();
+void runSecond(int* counter, int* second);
+void analogClockSim(int* hour, int *min, int *minCnt, int *sec, int *secCnt);
 
 #endif /* INC_LAB_H_ */

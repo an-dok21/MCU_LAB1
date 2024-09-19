@@ -16,3 +16,4 @@
 ../Core/Src/lab.c:258:6:setNumberOnClock	16	static
 ../Core/Src/lab.c:262:6:clearNumberOnClock	16	static
 ../Core/Src/lab.c:266:6:runSecond	16	static
+../Core/Src/lab.c:281:6:analogClockSim	24	static

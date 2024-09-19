@@ -92,23 +92,26 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-//  int light1 = 0;
-//  int light2 = 1;
-//  uint8_t time1 = 50;
-//  uint8_t time2 = 30;
-//
-//  uint8_t *time1Ptr = &time1;
-//  uint8_t *time2Ptr = &time2;
-//  int *light1Ptr = &light1;
-//  int *light2Ptr = &light2;
   clearAllClock();
   int second = 59, counter = 0;
   int *cntPtr = &counter;
   int *secPtr = &second;
+
+  // Hour, Minute, Second
+  int hour = 0;
+  int *hourPtr = &hour;
+
+  // Minute
+  int min = 0;
+  int *minPtr = &min;
+  int minCnt = 0;
+  int *minCntPtr = &minCnt;
+
   while (1)
   {
     /* USER CODE END WHILE */
-	  runSecond(cntPtr, secPtr);
+//	  runSecond(cntPtr, secPtr);
+	  analogClockSim(hourPtr, minPtr, minCntPtr, secPtr, cntPtr);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -16,3 +16,4 @@
 ../Core/Src/lab.c:258:6:setNumberOnClock	1
 ../Core/Src/lab.c:262:6:clearNumberOnClock	1
 ../Core/Src/lab.c:266:6:runSecond	3
+../Core/Src/lab.c:281:6:analogClockSim	8
