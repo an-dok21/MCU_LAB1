@@ -3,6 +3,7 @@
 int seg7Pin[] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6};
 int seg7Pin2[] = {GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14};
 int ledStateArray[] = {0, 0, 0, 0, 0, 0, 0};
+int analogClockPin[] = {GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
 
 /* Exercise 1.
  * */
@@ -239,7 +240,43 @@ void testLed() {
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
 }
 
+void clearAllClock() {
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, RESET);
+}
 
+void setNumberOnClock(int num) {
+	HAL_GPIO_WritePin(GPIOA, analogClockPin[num], SET);
+}
+
+void clearNumberOnClock(int num) {
+	HAL_GPIO_WritePin(GPIOA, analogClockPin[num], RESET);
+}
+
+void runSecond(int* counter, int* second) {
+	if (*second <= 0) {
+		*second = 59;
+		clearNumberOnClock(*counter);
+		if (*counter >= 11) {
+			*counter = 0;
+			clearAllClock();
+		} else {
+			*counter += 1; 		}
+	} else {
+		setNumberOnClock(*counter);
+	}
+	*second = *second - 1;
+}
 
 
 

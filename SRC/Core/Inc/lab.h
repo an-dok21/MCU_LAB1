@@ -33,6 +33,6 @@ void testLed();
 void clearAllClock();
 void setNumberOnClock(int num);
 void clearNumberOnClock(int num);
-
+void runSecond();
 
 #endif /* INC_LAB_H_ */
