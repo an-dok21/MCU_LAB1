@@ -19,12 +19,20 @@ void toggle2Led(uint8_t* status);
  * */
 void oneWayTrafficLight(uint8_t* time, int* light);
 
-/* Exercise 3
+/* Exercise 3 and Exercise 5
  * */
 void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light2);
 
 /* Exercise 4
  * */
 void display7Segment(uint8_t number, int gpioPin[7]);
+
+/* Exercise 6, 7, 8, 9, 10
+ * */
+void testLed();
+void clearAllClock();
+void setNumberOnClock(int num);
+void clearNumberOnClock(int num);
+
 
 #endif /* INC_LAB_H_ */

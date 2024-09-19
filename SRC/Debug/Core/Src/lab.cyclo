@@ -11,3 +11,4 @@
 ../Core/Src/lab.c:170:6:convertState	3
 ../Core/Src/lab.c:181:6:display	2
 ../Core/Src/lab.c:188:6:display7Segment	11
+../Core/Src/lab.c:227:6:testLed	1

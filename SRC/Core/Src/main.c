@@ -17,7 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <lab.h>
+#include "lab.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -92,26 +92,19 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
-  HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
-  HAL_GPIO_WritePin(GPIOA, LED_3_Pin, RESET);
-  HAL_GPIO_WritePin(GPIOA, LED_4_Pin, RESET);
-  HAL_GPIO_WritePin(GPIOA, LED_5_Pin, RESET);
-  HAL_GPIO_WritePin(GPIOA, LED_6_Pin, RESET);
-
-  int light1 = 0;
-  int light2 = 1;
-  uint8_t time1 = 50;
-  uint8_t time2 = 30;
-
-  uint8_t *time1Ptr = &time1;
-  uint8_t *time2Ptr = &time2;
-  int *light1Ptr = &light1;
-  int *light2Ptr = &light2;
+//  int light1 = 0;
+//  int light2 = 1;
+//  uint8_t time1 = 50;
+//  uint8_t time2 = 30;
+//
+//  uint8_t *time1Ptr = &time1;
+//  uint8_t *time2Ptr = &time2;
+//  int *light1Ptr = &light1;
+//  int *light2Ptr = &light2;
   while (1)
   {
     /* USER CODE END WHILE */
-	  fourWayTrafficLight(time1Ptr, time2Ptr, light1Ptr, light2Ptr);
+	  testLed();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -169,8 +162,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_1_Pin|LED_2_Pin|LED_3_Pin|LED_4_Pin
-                          |LED_5_Pin|LED_6_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6
+                          |GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10
+                          |GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14
+                          |GPIO_PIN_15, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10
@@ -178,10 +173,14 @@ static void MX_GPIO_Init(void)
                           |GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6
                           |GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_1_Pin LED_2_Pin LED_3_Pin LED_4_Pin
-                           LED_5_Pin LED_6_Pin */
-  GPIO_InitStruct.Pin = LED_1_Pin|LED_2_Pin|LED_3_Pin|LED_4_Pin
-                          |LED_5_Pin|LED_6_Pin;
+  /*Configure GPIO pins : PA3 PA4 PA5 PA6
+                           PA7 PA8 PA9 PA10
+                           PA11 PA12 PA13 PA14
+                           PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6
+                          |GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10
+                          |GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14
+                          |GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

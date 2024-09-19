@@ -9,12 +9,12 @@ int ledStateArray[] = {0, 0, 0, 0, 0, 0, 0};
 void toggle2Led(uint8_t* status) {
 	if (*status == 0) {
 		// Set state for two gpio pin
-		HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
-		HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
 		*status = 1;
 	} else {
-		HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
-		HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, RESET);
 		*status = 0;
 	}
 	// Delay for 2 second
@@ -28,37 +28,37 @@ void toggle2Led(uint8_t* status) {
  * LED-GREEN is also controlled by its negative pin.
  * */
 void turnOnRed() {
-	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
-	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, RESET);
 }
 
 void turnOnYellow() {
-	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
-	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, RESET);
 }
 
 void turnOnGreen() {
-	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, SET);
 }
 
 void extraTurnOnRed() {
-	HAL_GPIO_WritePin(GPIOA, LED_4_Pin, SET);
-	HAL_GPIO_WritePin(GPIOA, LED_5_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_6_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, RESET);
 }
 void extraTurnOnYellow() {
-	HAL_GPIO_WritePin(GPIOA, LED_4_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_5_Pin, SET);
-	HAL_GPIO_WritePin(GPIOA, LED_6_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, RESET);
 }
 void extraTurnOnGreen() {
-	HAL_GPIO_WritePin(GPIOA, LED_4_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_5_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_6_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, SET);
 }
 
 void oneWayTrafficLight(uint8_t* time, int* light) {
@@ -124,7 +124,7 @@ void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light
 			*time2 = *time2 - 1;
 			turnOnRed();
 			extraTurnOnYellow();
-		} else {
+		} else { // GREEN1 and RED2
 			*time1 = 30; // set time for GREEN1
 			*time2 = 50; // set time for RED2
 			*light1 = 1;
@@ -132,7 +132,7 @@ void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light
 			turnOnGreen();
 			extraTurnOnRed();
 		}
-	} else if (*light1 == 1 && *light2 == 0) {
+	} else if (*light1 == 1 && *light2 == 0) { // GREEN1 and RED2
 		if (*time1 != 0 && *time2 != 0) {
 			*time1 = *time1 - 1;
 			*time2 = *time2 - 1;
@@ -221,6 +221,24 @@ void display7Segment(uint8_t number, int gpioPin[7]) {
 		break;
 	}
 }
+
+/* Exercise 6, 7, 8, 9, 10
+ * */
+void testLed() {
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
+}
+
 
 
 
