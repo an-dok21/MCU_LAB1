@@ -92,10 +92,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t state = 0;
+  uint8_t* status = &state;
+  HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
+  HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
   while (1)
   {
     /* USER CODE END WHILE */
-	  toggle2Led();
+	  toggle2Led(status);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -12,7 +12,7 @@
  * In this exercise, the status of two LEDs are switched every 2 seconds, as demonstrated in
  * the figure bellow.
  * */
-void toggle2Led();
+void toggle2Led(uint8_t* status);
 
 
 #endif /* INC_LAB_H_ */
