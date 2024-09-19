@@ -17,7 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include <lab.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -95,11 +95,15 @@ int main(void)
   HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
   HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
   HAL_GPIO_WritePin(GPIOA, LED_3_Pin, SET);
+
+  int light = 0;
+  int* lightPtr = &light;
+  uint8_t time = 50;
+  uint8_t *timePtr = &time;
   while (1)
   {
     /* USER CODE END WHILE */
-	  oneWayTrafficLight();
-
+	  oneWayTrafficLight(timePtr, lightPtr);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

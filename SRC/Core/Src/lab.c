@@ -2,19 +2,18 @@
 
 /* Exercise 1.
  * */
-void toggle2Led() {
-	// Set state for two gpio pin
-	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
-
+void toggle2Led(uint8_t* status) {
+	if (*status == 0) {
+		// Set state for two gpio pin
+		HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
+		HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
+		*status = 1;
+	} else {
+		HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
+		HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
+		*status = 0;
+	}
 	// Delay for 2 second
-	HAL_Delay(2000);
-
-	// Toggle two pin
-	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
-	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
-
-	// Delay for 2 seconds
 	HAL_Delay(2000);
 }
 
@@ -42,14 +41,39 @@ void turnOnGreen() {
 	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, RESET);
 }
 
-void oneWayTrafficLight() {
+
+void oneWayTrafficLight(uint8_t* time, int* light) {
 	/* FSM:
 	 * Init => turn on Red -> turn on Yellow -> turn on Green -> turn on Red -> ...
 	 * */
-	turnOnRed();
-	HAL_Delay(5000);
-	turnOnYellow();
-	HAL_Delay(2000);
-	turnOnGreen();
-	HAL_Delay(3000);
+	if (*light == 0) { // RED
+		if (*time != 1) {
+			*time = *time - 1;
+			turnOnRed();
+		}
+		else {
+			*time = 20;
+			*light = 1;
+		}
+	} else if (*light == 1) { // YELLOW
+		if (*time != 1) {
+			*time = *time - 1;
+			turnOnYellow();
+		}
+		else {
+			*time = 30;
+			*light = 2;
+		}
+	} else { // GREEN
+		if (*time != 1) {
+			*time = *time - 1;
+			turnOnGreen();
+		}
+		else {
+			*time = 50;
+			*light = 0;
+		}
+	}
+	// Delay for 100ms
+	HAL_Delay(100);
 }

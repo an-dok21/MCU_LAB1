@@ -1,5 +1,5 @@
-../Core/Src/lab.c:5:6:toggle2Led	8	static
-../Core/Src/lab.c:27:6:turnOnRed	8	static
-../Core/Src/lab.c:33:6:turnOnYellow	8	static
-../Core/Src/lab.c:39:6:turnOnGreen	8	static
-../Core/Src/lab.c:45:6:oneWayTrafficLight	8	static
+../Core/Src/lab.c:5:6:toggle2Led	16	static
+../Core/Src/lab.c:26:6:turnOnRed	8	static
+../Core/Src/lab.c:32:6:turnOnYellow	8	static
+../Core/Src/lab.c:38:6:turnOnGreen	8	static
+../Core/Src/lab.c:45:6:oneWayTrafficLight	16	static
