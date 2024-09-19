@@ -2,4 +2,8 @@
 ../Core/Src/lab.c:26:6:turnOnRed	8	static
 ../Core/Src/lab.c:32:6:turnOnYellow	8	static
 ../Core/Src/lab.c:38:6:turnOnGreen	8	static
-../Core/Src/lab.c:45:6:oneWayTrafficLight	16	static
+../Core/Src/lab.c:44:6:extraTurnOnRed	8	static
+../Core/Src/lab.c:49:6:extraTurnOnYellow	8	static
+../Core/Src/lab.c:54:6:extraTurnOnGreen	8	static
+../Core/Src/lab.c:60:6:oneWayTrafficLight	16	static
+../Core/Src/lab.c:99:6:fourWayTrafficLight	24	static

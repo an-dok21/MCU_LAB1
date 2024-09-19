@@ -17,7 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <lab.h>
+#include<lab.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -92,18 +92,27 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
-  HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
-  HAL_GPIO_WritePin(GPIOA, LED_3_Pin, SET);
+  HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_3_Pin, RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_4_Pin, RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_5_Pin, RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_6_Pin, RESET);
 
-  int light = 0;
-  int* lightPtr = &light;
-  uint8_t time = 50;
-  uint8_t *timePtr = &time;
+  int light1 = 0;
+  int light2 = 1;
+  uint8_t time1 = 50;
+  uint8_t time2 = 30;
+
+  uint8_t *time1Ptr = &time1;
+  uint8_t *time2Ptr = &time2;
+  int *light1Ptr = &light1;
+  int *light2Ptr = &light2;
+
   while (1)
   {
     /* USER CODE END WHILE */
-	  oneWayTrafficLight(timePtr, lightPtr);
+	  fourWayTrafficLight(time1Ptr, time2Ptr, light1Ptr, light2Ptr);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -160,10 +169,13 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_1_Pin|LED_2_Pin|LED_3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_1_Pin|LED_2_Pin|LED_3_Pin|LED_4_Pin
+                          |LED_5_Pin|LED_6_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_1_Pin LED_2_Pin LED_3_Pin */
-  GPIO_InitStruct.Pin = LED_1_Pin|LED_2_Pin|LED_3_Pin;
+  /*Configure GPIO pins : LED_1_Pin LED_2_Pin LED_3_Pin LED_4_Pin
+                           LED_5_Pin LED_6_Pin */
+  GPIO_InitStruct.Pin = LED_1_Pin|LED_2_Pin|LED_3_Pin|LED_4_Pin
+                          |LED_5_Pin|LED_6_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

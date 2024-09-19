@@ -14,6 +14,12 @@
  * the figure bellow.
  * */
 void toggle2Led(uint8_t* status);
+
+/* Exercise2
+ * */
 void oneWayTrafficLight(uint8_t* time, int* light);
 
+/* Exercise 3
+ * */
+void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light2);
 #endif /* INC_LAB_H_ */

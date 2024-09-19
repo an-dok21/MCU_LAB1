@@ -24,23 +24,38 @@ void toggle2Led(uint8_t* status) {
  * LED-GREEN is also controlled by its negative pin.
  * */
 void turnOnRed() {
-	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
-	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, RESET);
 }
 
 void turnOnYellow() {
-	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
-	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, SET);
-}
-
-void turnOnGreen() {
-	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
 	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
 	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, RESET);
 }
 
+void turnOnGreen() {
+	HAL_GPIO_WritePin(GPIOA, LED_1_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, LED_2_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, LED_3_Pin, SET);
+}
+
+void extraTurnOnRed() {
+	HAL_GPIO_WritePin(GPIOA, LED_4_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, LED_5_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, LED_6_Pin, RESET);
+}
+void extraTurnOnYellow() {
+	HAL_GPIO_WritePin(GPIOA, LED_4_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, LED_5_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, LED_6_Pin, RESET);
+}
+void extraTurnOnGreen() {
+	HAL_GPIO_WritePin(GPIOA, LED_4_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, LED_5_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, LED_6_Pin, SET);
+}
 
 void oneWayTrafficLight(uint8_t* time, int* light) {
 	/* FSM:
@@ -52,19 +67,19 @@ void oneWayTrafficLight(uint8_t* time, int* light) {
 			turnOnRed();
 		}
 		else {
-			*time = 20;
-			*light = 1;
-		}
-	} else if (*light == 1) { // YELLOW
-		if (*time != 1) {
-			*time = *time - 1;
-			turnOnYellow();
-		}
-		else {
 			*time = 30;
 			*light = 2;
 		}
-	} else { // GREEN
+	} else if (*light == 1) { // GREEN
+		if (*time != 1) {
+			*time = *time - 1;
+			turnOnGreen();
+		}
+		else {
+			*time = 20;
+			*light = 1;
+		}
+	} else { // YELLOW
 		if (*time != 1) {
 			*time = *time - 1;
 			turnOnGreen();
@@ -77,3 +92,67 @@ void oneWayTrafficLight(uint8_t* time, int* light) {
 	// Delay for 100ms
 	HAL_Delay(100);
 }
+
+
+/* Exercise 3:
+ * */
+void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light2) {
+	if (*light1 == 0 && *light2 == 1) { // RED1 and GREEN2
+		if (*time1 != 0 && *time2 != 0) {
+			*time1 = *time1 - 1;
+			*time2 = *time2 - 1;
+			turnOnRed();
+			extraTurnOnGreen();
+		} else { // RED1 and YELLOW2
+			*time2 = 20; // set time for yellow led
+ 			*light2 = 2; // turn to Yellow
+			turnOnRed();
+		}
+	} else if (*light1 == 0 && *light2 == 2) { // RED1 and YELLOW2
+		if (*time1 != 0 && *time2 != 0) {
+			*time1 = *time1 - 1;
+			*time2 = *time2 - 1;
+			turnOnRed();
+			extraTurnOnYellow();
+		} else {
+			*time1 = 30; // set time for GREEN1
+			*time2 = 50; // set time for RED2
+			*light1 = 1;
+			*light2 = 0;
+			turnOnGreen();
+			extraTurnOnRed();
+		}
+	} else if (*light1 == 1 && *light2 == 0) {
+		if (*time1 != 0 && *time2 != 0) {
+			*time1 = *time1 - 1;
+			*time2 = *time2 - 1;
+			extraTurnOnRed();
+			turnOnGreen();
+		} else { // YELLOW1 and RED2
+			*time1 = 20; // set time for yellow led
+			*light1 = 2; // turn to Yellow
+			extraTurnOnRed();
+		}
+	} else if (*light1 == 2 && *light2 == 0) {
+		if (*time1 != 0 && *time2 != 0) {
+			*time1 = *time1 - 1;
+			*time2 = *time2 - 1;
+			extraTurnOnRed();
+			turnOnYellow();
+		} else {
+			*time1 = 50; // set time for RED1
+			*time2 = 30; // set time for GREEN2
+			*light1 = 0;
+			*light2 = 1;
+			turnOnRed();
+			extraTurnOnGreen();
+		}
+	}
+	HAL_Delay(100);
+}
+
+
+
+
+
+

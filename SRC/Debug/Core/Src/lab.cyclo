@@ -2,4 +2,8 @@
 ../Core/Src/lab.c:26:6:turnOnRed	1
 ../Core/Src/lab.c:32:6:turnOnYellow	1
 ../Core/Src/lab.c:38:6:turnOnGreen	1
-../Core/Src/lab.c:45:6:oneWayTrafficLight	6
+../Core/Src/lab.c:44:6:extraTurnOnRed	1
+../Core/Src/lab.c:49:6:extraTurnOnYellow	1
+../Core/Src/lab.c:54:6:extraTurnOnGreen	1
+../Core/Src/lab.c:60:6:oneWayTrafficLight	6
+../Core/Src/lab.c:99:6:fourWayTrafficLight	17
