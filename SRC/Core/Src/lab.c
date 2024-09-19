@@ -1,6 +1,7 @@
 #include<lab.h>
 
-uint8_t seg7Pin[] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6};
+int seg7Pin[] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6};
+int seg7Pin2[] = {GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14};
 int ledStateArray[] = {0, 0, 0, 0, 0, 0, 0};
 
 /* Exercise 1.
@@ -97,9 +98,15 @@ void oneWayTrafficLight(uint8_t* time, int* light) {
 }
 
 
-/* Exercise 3:
+/* Exercise 3 and 5: added display 7 segment LED
  * */
 void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light2) {
+	if (*time1 % 10 == 0) {
+		display7Segment((*time1 / 10), seg7Pin);
+	}
+	if (*time2 % 10 == 0) {
+		display7Segment((*time2 / 10), seg7Pin2);
+	}
 	if (*light1 == 0 && *light2 == 1) { // RED1 and GREEN2
 		if (*time1 != 0 && *time2 != 0) {
 			*time1 = *time1 - 1;
@@ -171,44 +178,44 @@ int* convertState(char* stateStr, int count) {
 	return result;
 }
 
-void display(uint8_t gpios[7], char* stateStr) {
+void display(int gpios[7], char* stateStr) {
 	int* states = convertState(stateStr, 7);
 	for (int i = 0; i < 7; i++) {
 		HAL_GPIO_WritePin(GPIOB, gpios[i], states[i]);
 	}
 }
 
-void display7Segment(uint8_t number) {
+void display7Segment(uint8_t number, int gpioPin[7]) {
 	switch (number) {
 	case 0:
-		display(seg7Pin, "0000001");
+		display(gpioPin, "0000001");
 		break;
 	case 1:
-		display(seg7Pin, "1001111");
+		display(gpioPin, "1001111");
 		break;
 	case 2:
-		display(seg7Pin, "0010010");
+		display(gpioPin, "0010010");
 		break;
 	case 3:
-		display(seg7Pin, "0000110");
+		display(gpioPin, "0000110");
 		break;
 	case 4:
-		display(seg7Pin, "1001100");
+		display(gpioPin, "1001100");
 		break ;
 	case 5:
-		display(seg7Pin, "0100100");
+		display(gpioPin, "0100100");
 		break;
 	case 6:
-		display(seg7Pin, "0100000");
+		display(gpioPin, "0100000");
 		break ;
 	case 7:
-		display(seg7Pin, "0001111");
+		display(gpioPin, "0001111");
 		break;
 	case 8:
-		display(seg7Pin, "0000000");
+		display(gpioPin, "0000000");
 		break;
 	case 9:
-		display(seg7Pin, "0000100");
+		display(gpioPin, "0000100");
 		break;
 	default:
 		break;

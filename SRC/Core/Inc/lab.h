@@ -25,6 +25,6 @@ void fourWayTrafficLight(uint8_t* time1, uint8_t* time2, int* light1, int* light
 
 /* Exercise 4
  * */
-void display7Segment(uint8_t number);
+void display7Segment(uint8_t number, int gpioPin[7]);
 
 #endif /* INC_LAB_H_ */
