@@ -17,7 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <lab.h>
+#include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -92,10 +92,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  HAL_GPIO_WritePin(GPIOA, LED_1_Pin, SET);
+  HAL_GPIO_WritePin(GPIOA, LED_2_Pin, SET);
+  HAL_GPIO_WritePin(GPIOA, LED_3_Pin, SET);
   while (1)
   {
     /* USER CODE END WHILE */
-	  toggle2Led();
+	  oneWayTrafficLight();
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -152,10 +156,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_1_Pin|LED_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_1_Pin|LED_2_Pin|LED_3_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_1_Pin LED_2_Pin */
-  GPIO_InitStruct.Pin = LED_1_Pin|LED_2_Pin;
+  /*Configure GPIO pins : LED_1_Pin LED_2_Pin LED_3_Pin */
+  GPIO_InitStruct.Pin = LED_1_Pin|LED_2_Pin|LED_3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
